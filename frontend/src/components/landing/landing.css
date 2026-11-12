@@ -1,0 +1,289 @@
+/* =========================================================
+   PUBLIC LANDING PAGE
+========================================================= */
+
+.landing {
+  height: 100vh;
+  height: 100dvh;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  background: var(--surface);
+  color: var(--ink-900);
+}
+
+.land-nav {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px clamp(16px, 5vw, 64px);
+  background: rgba(255, 255, 255, 0.94);
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.land-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.land-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: var(--brand-600);
+  color: #fff;
+}
+
+.land-nav nav {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.land-nav nav a {
+  font-size: 14px;
+  color: var(--ink-700);
+  text-decoration: none;
+}
+
+.land-link {
+  border: 0;
+  background: transparent;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink-900);
+  cursor: pointer;
+}
+
+.land-cta {
+  padding: 14px 24px;
+  border: 0;
+  border-radius: 12px;
+  background: var(--brand-600);
+  color: #fff;
+  font: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.land-cta:hover {
+  background: var(--brand-700);
+}
+
+.land-cta.small {
+  padding: 9px 14px;
+  font-size: 14px;
+  border-radius: 10px;
+}
+
+.land-ghost {
+  padding: 14px 24px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface);
+  color: var(--ink-900);
+  font: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.land-hero {
+  padding: clamp(48px, 9vw, 104px) clamp(16px, 5vw, 64px);
+  text-align: center;
+  background: linear-gradient(180deg, var(--brand-50), var(--surface));
+}
+
+.land-hero h1 {
+  max-width: 760px;
+  margin: 0 auto 16px;
+  font-size: clamp(32px, 6vw, 54px);
+  line-height: 1.12;
+  letter-spacing: -1px;
+}
+
+.land-hero p {
+  max-width: 600px;
+  margin: 0 auto 26px;
+  font-size: clamp(16px, 2.4vw, 19px);
+  line-height: 1.55;
+  color: var(--ink-700);
+}
+
+.land-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.land-hero small {
+  color: var(--ink-500);
+  font-size: 13.5px;
+}
+
+.land-section {
+  padding: clamp(40px, 7vw, 72px) clamp(16px, 5vw, 64px);
+  text-align: center;
+}
+
+.land-section.tint {
+  background: var(--page);
+}
+
+.land-section h2 {
+  margin: 0 0 12px;
+  font-size: clamp(25px, 4vw, 34px);
+  letter-spacing: -0.5px;
+}
+
+.land-sub {
+  margin: 0 0 26px;
+  color: var(--ink-500);
+}
+
+.land-features {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  max-width: 1040px;
+  margin: 28px auto 0;
+  text-align: left;
+}
+
+.land-features article {
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+}
+
+.land-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  margin-bottom: 12px;
+  border-radius: 11px;
+  background: var(--brand-50);
+  color: var(--brand-700);
+}
+
+.land-features h3 {
+  margin: 0 0 6px;
+  font-size: 17px;
+}
+
+.land-features p {
+  margin: 0;
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--ink-500);
+}
+
+.land-prices {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 26px;
+}
+
+.land-prices article {
+  width: min(250px, 100%);
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--surface);
+}
+
+.land-prices article.best {
+  border: 2px solid var(--brand-600);
+}
+
+.land-prices h3 {
+  margin: 0 0 8px;
+  font-size: 15px;
+  color: var(--ink-500);
+}
+
+.land-prices strong {
+  display: block;
+  font-size: 34px;
+  letter-spacing: -0.5px;
+}
+
+.land-prices span {
+  font-size: 13.5px;
+  color: var(--ink-500);
+}
+
+.land-faq {
+  max-width: 720px;
+  margin: 24px auto 0;
+  text-align: left;
+}
+
+.land-faq details {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.land-faq summary {
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.land-faq p {
+  margin: 10px 0 0;
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--ink-500);
+}
+
+.land-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 18px;
+  padding: 24px 16px;
+  border-top: 1px solid var(--line);
+  font-size: 13.5px;
+  color: var(--ink-500);
+}
+
+.land-footer a {
+  color: var(--ink-500);
+}
+
+@media (max-width: 860px) {
+  .land-features {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .land-features {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .land-nav nav a {
+    display: none;
+  }
+
+  .land-actions button {
+    width: 100%;
+  }
+}

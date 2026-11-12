@@ -1,0 +1,52 @@
+MedTrack Email OTP + Google Auth backend patch
+
+FILES
+- ApiServer.java: adds /api/auth/* endpoints and makes legacy /api/login and /api/signup require OTP too.
+- DatabaseHelper.java: adds email/username lookup helpers; preserves existing tables and medicine/sales functions.
+- AuthService.java: OTP generation/expiry/attempt limit, Gmail SMTP sending, Google ID-token verification.
+
+BEFORE REPLACING
+1. Stop the Java API server.
+2. Make a backup copy of src/ApiServer.java and src/DatabaseHelper.java.
+3. Copy these three Java files into C:\MedicineManagementSystem\src\ (overwrite ApiServer.java and DatabaseHelper.java; add AuthService.java).
+4. Do not delete or replace the SQLite database.
+
+REQUIRED ENVIRONMENT VARIABLES (Windows PowerShell; set these in the same terminal before starting the API)
+$env:SMTP_EMAIL="your-gmail-address@gmail.com"
+$env:SMTP_APP_PASSWORD="your-16-character-google-app-password"
+$env:GOOGLE_CLIENT_ID="your-google-oauth-web-client-id.apps.googleusercontent.com"
+
+Use your own values. Never paste the app password or any OAuth secret into chat or React source code. The Google Client ID is public configuration; the Google Client Secret is not used by this frontend ID-token flow.
+
+COMPILE
+From C:\MedicineManagementSystem, use your existing classpath and include AuthService.java, e.g.:
+javac -cp "lib/*" -d out src\Medicine.java src\DatabaseHelper.java src\AuthService.java src\ApiServer.java
+
+If Medicine.java is not in src, use the existing location where your project keeps it. Keep your existing jars and other source files.
+
+RUN
+java -cp "out;lib/*" ApiServer
+
+AUTH ENDPOINTS (POST JSON)
+POST http://localhost:8080/api/auth/signup
+{"username":"demo_user","email":"your-address@example.com","password":"at-least-8-characters"}
+
+POST http://localhost:8080/api/auth/login
+{"username":"demo_user-or-email","password":"your-password"}
+
+POST http://localhost:8080/api/auth/google
+{"credential":"GOOGLE_ID_TOKEN_FROM_GOOGLE_IDENTITY_SERVICES"}
+
+POST http://localhost:8080/api/auth/verify-otp
+{"challengeId":"ID_RETURNED_BY_START_ENDPOINT","otp":"123456"}
+
+POST http://localhost:8080/api/auth/resend-otp
+{"challengeId":"CURRENT_CHALLENGE_ID"}
+
+Signup account creation is deferred until OTP verification. Login credentials are checked before sending OTP. Google ID tokens are verified server-side against GOOGLE_CLIENT_ID, and a new Google account is created only after OTP verification.
+
+IMPORTANT
+- Frontend must be updated to call the start endpoint, show OTP input, then call verify-otp before navigating to Dashboard. Do not treat the initial 200 response as a completed login/signup.
+- Google login must send the ID token returned by Google Identity Services as `credential`; never send only a client-provided email.
+- OTPs are stored in memory and are cleared if the API process restarts. For a single-instance local app this is acceptable for initial testing; production should use persistent/shared OTP storage, rate limiting, HTTPS, and a stronger password hash (the existing database currently uses SHA-256).
+- The older /api/login and /api/signup paths now also start OTP verification, so an old frontend that expects immediate login/signup will need the frontend update next.

@@ -1,0 +1,23 @@
+# Java API server (build once, run on a small JRE image).
+FROM eclipse-temurin:21-jdk AS build
+WORKDIR /app
+COPY src ./src
+COPY lib/sqlite-jdbc-*.jar ./lib/
+RUN mkdir out && javac --release 21 -encoding UTF-8 -cp "lib/*" -d out src/*.java
+
+FROM eclipse-temurin:21-jre
+WORKDIR /app
+RUN useradd --system --create-home app && mkdir -p /data && chown app:app /data
+COPY --from=build /app/out ./out
+COPY --from=build /app/lib ./lib
+
+# The database lives on a volume (/data), never inside the image.
+ENV PORT=8080 \
+    DB_PATH=/data/medicine_inventory.db \
+    TRUST_PROXY=true \
+    TZ=Asia/Kolkata
+USER app
+VOLUME /data
+EXPOSE 8080
+# Bills and expiry checks must use Indian time, not the server's UTC clock.
+CMD ["java", "-Duser.timezone=Asia/Kolkata", "-Djava.awt.headless=true", "-XX:MaxRAMPercentage=60", "-cp", "out:lib/*", "ApiServer"]

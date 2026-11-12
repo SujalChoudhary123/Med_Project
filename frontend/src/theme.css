@@ -1,0 +1,687 @@
+/* =========================================================
+   MEDTRACK THEME (loaded after App.css, so it wins)
+   One refined layer that restyles the shell and every page that
+   shares the common classes: sidebar, topbar, cards, stat cards,
+   tables, buttons, forms, reports and settings.
+   Dark mode rules in App.css keep working (they are more specific).
+========================================================= */
+
+/* ---------- App shell ---------- */
+
+.app {
+  background: var(--page);
+  color: var(--ink-900);
+}
+
+.main-content {
+  padding: 26px 36px 0;
+}
+
+/* ---------- Sidebar ---------- */
+
+.sidebar {
+  width: 250px;
+  height: 100vh;
+  min-height: 100vh;
+  padding: 22px 14px 18px;
+  background: #0b1814;
+  border-right: 1px solid #14261f;
+  overflow-y: auto;
+}
+
+.logo {
+  gap: 12px;
+  padding: 4px 10px 26px;
+}
+
+.logo-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 11px;
+  color: #fff;
+  background: linear-gradient(135deg, #10b981, #059669);
+  box-shadow: 0 8px 20px rgba(5, 150, 105, 0.3);
+}
+
+.logo h2 {
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  color: #f1f5f9;
+}
+
+.logo span {
+  margin-top: 3px;
+  font-size: 11.5px;
+  color: #6f8c82;
+  letter-spacing: 0;
+}
+
+.nav-caption {
+  padding: 0 12px 8px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.9px;
+  text-transform: uppercase;
+  color: #4d6a60;
+}
+
+.navigation {
+  gap: 3px;
+}
+
+.nav-item {
+  position: relative;
+  padding: 11px 12px;
+  gap: 12px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #9db3aa;
+}
+
+.nav-item span {
+  width: 20px;
+  height: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  flex-shrink: 0;
+}
+
+.nav-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: #e2efe9;
+}
+
+.nav-item.active {
+  background: rgba(16, 185, 129, 0.14);
+  border-color: transparent;
+  color: #6ee7b7;
+}
+
+.nav-item.active::before {
+  content: "";
+  position: absolute;
+  left: -14px;
+  top: 9px;
+  bottom: 9px;
+  width: 3px;
+  border-radius: 0 3px 3px 0;
+  background: #10b981;
+}
+
+.nav-item.active span {
+  color: #6ee7b7;
+}
+
+.sidebar-bottom {
+  padding-top: 14px;
+  border-top: 1px solid #14261f;
+}
+
+.logout:hover {
+  color: #fca5a5;
+  background: rgba(239, 68, 68, 0.1);
+}
+
+/* ---------- Top bar ---------- */
+
+.topbar {
+  margin-bottom: 22px;
+  gap: 16px;
+}
+
+.topbar h1 {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: var(--ink-900);
+}
+
+.topbar p {
+  margin-top: 5px;
+  font-size: 14px;
+  color: var(--ink-500);
+}
+
+.topbar .profile-trigger {
+  min-width: 0;
+  gap: 10px;
+  padding: 6px 12px 6px 6px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.topbar .profile-trigger:hover {
+  border-color: #cbd5e1;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.topbar .profile-trigger .profile-avatar {
+  width: 38px;
+  height: 38px;
+  flex: 0 0 38px;
+  border-radius: 10px;
+  font-size: 15px;
+  color: #fff;
+  background: linear-gradient(135deg, #10b981, #047857);
+}
+
+.topbar .profile-trigger-details {
+  gap: 2px;
+}
+
+.topbar .profile-trigger-details strong {
+  font-size: 13.5px;
+  color: var(--ink-900);
+}
+
+.topbar .profile-trigger-details span {
+  font-size: 12px;
+  color: var(--ink-500);
+}
+
+.topbar .profile-chevron {
+  font-size: 14px;
+  color: var(--ink-400);
+}
+
+.topbar .profile-dropdown {
+  border-color: var(--line);
+  border-radius: 14px;
+  box-shadow: var(--shadow-lg);
+}
+
+.topbar .profile-dropdown-avatar {
+  color: #fff;
+  background: linear-gradient(135deg, #10b981, #047857);
+}
+
+.topbar .profile-dropdown .profile-dropdown-item:hover {
+  background: var(--brand-50);
+  color: var(--brand-700);
+}
+
+/* ---------- Cards ---------- */
+
+.dashboard-card,
+.inventory-card,
+.settings-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.card-header {
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.card-header h2,
+.inventory-card-header h2 {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+  color: var(--ink-900);
+}
+
+.card-header p,
+.inventory-card-header p {
+  margin-top: 4px;
+  font-size: 13px;
+  color: var(--ink-500);
+}
+
+.inventory-card-header {
+  padding: 20px 22px;
+  border-bottom-color: var(--line-soft);
+}
+
+/* ---------- Stat cards ---------- */
+
+.stats-grid {
+  gap: 16px;
+}
+
+.stat-card {
+  align-items: center;
+  gap: 14px;
+  padding: 20px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.stat-card:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow);
+}
+
+.stat-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  font-size: 18px;
+}
+
+.stat-icon.blue,
+.stat-icon.green {
+  background: var(--brand-50);
+  color: var(--brand-600);
+}
+
+.stat-icon.orange {
+  background: var(--warn-50);
+  color: var(--warn-600);
+}
+
+.stat-icon.red {
+  background: var(--danger-50);
+  color: var(--danger-600);
+}
+
+.stat-card span {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink-500);
+}
+
+.stat-card strong {
+  margin-top: 4px;
+  font-size: 26px;
+  letter-spacing: -0.6px;
+  color: var(--ink-900);
+}
+
+.stat-card small {
+  margin-top: 3px;
+  font-size: 12px;
+  color: var(--ink-400);
+}
+
+/* ---------- Buttons ---------- */
+
+.primary-button,
+.add-medicine-button {
+  height: 40px;
+  padding: 0 18px;
+  border-radius: 10px;
+  font-size: 13.5px;
+  font-weight: 600;
+  background: var(--brand-600);
+  box-shadow: 0 1px 2px rgba(5, 150, 105, 0.3);
+}
+
+.primary-button:hover,
+.add-medicine-button:hover {
+  background: var(--brand-700);
+  box-shadow: 0 6px 16px rgba(5, 150, 105, 0.25);
+}
+
+.view-button {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--brand-600);
+}
+
+.secondary-button,
+.delete-button,
+.filter-button,
+.refresh-button {
+  height: 40px;
+  padding: 0 15px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.secondary-button,
+.filter-button,
+.refresh-button {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink-700);
+}
+
+.secondary-button:hover,
+.filter-button:hover,
+.refresh-button:hover {
+  border-color: var(--brand-600);
+  background: var(--brand-50);
+  color: var(--brand-700);
+}
+
+.delete-button {
+  border: 1px solid #fecaca;
+  background: var(--danger-50);
+  color: var(--danger-600);
+}
+
+/* ---------- Search, filters, forms ---------- */
+
+.inventory-toolbar {
+  margin-bottom: 18px;
+}
+
+.search-box {
+  height: 40px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface);
+}
+
+.search-box:focus-within,
+.search-area select:focus {
+  border-color: var(--brand-600);
+  box-shadow: 0 0 0 4px rgba(5, 150, 105, 0.12);
+}
+
+.search-box input {
+  font-size: 13.5px;
+  color: var(--ink-900);
+}
+
+.search-area select {
+  height: 40px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  font-size: 13.5px;
+  color: var(--ink-700);
+}
+
+/* ---------- Tables ---------- */
+
+.inventory-table th,
+.inventory-table thead th {
+  padding: 12px 16px;
+  background: #f8fafb;
+  border-bottom: 1px solid var(--line);
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: var(--ink-500);
+}
+
+.inventory-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--line-soft);
+  font-size: 13.5px;
+  color: var(--ink-700);
+}
+
+.inventory-table tbody tr:hover {
+  background: #f8fbfa;
+}
+
+.medicine-id {
+  color: var(--brand-600) !important;
+  font-weight: 600;
+}
+
+.medicine-name {
+  color: var(--ink-900) !important;
+  font-weight: 600;
+}
+
+.category-badge {
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #f1f5f9;
+  color: var(--ink-700);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.quantity-badge {
+  min-width: 32px;
+  padding: 4px 9px;
+  border-radius: 999px;
+  background: var(--brand-50);
+  color: var(--brand-700);
+  font-size: 12.5px;
+  font-weight: 600;
+}
+
+.quantity-badge.low {
+  background: var(--warn-50);
+  color: var(--warn-600);
+}
+
+.inventory-footer {
+  min-height: 60px;
+  border-top-color: var(--line-soft);
+}
+
+.inventory-footer > span {
+  font-size: 13px;
+  color: var(--ink-500);
+}
+
+/* ---------- Alerts + empty states ---------- */
+
+.alert-item {
+  padding: 15px 0;
+  border-bottom-color: var(--line-soft);
+}
+
+.alert-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 11px;
+}
+
+.alert-item strong {
+  font-size: 14px;
+  color: var(--ink-900);
+}
+
+.alert-item p {
+  font-size: 13px;
+  color: var(--ink-500);
+}
+
+.empty-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  background: var(--brand-50);
+  color: var(--brand-600);
+}
+
+.empty-state h3 {
+  font-size: 16px;
+  color: var(--ink-900);
+}
+
+.empty-state p {
+  font-size: 13.5px;
+  color: var(--ink-500);
+}
+
+/* ---------- Reports ---------- */
+
+.reports-toolbar h2,
+.settings-heading h2 {
+  font-size: 22px;
+  letter-spacing: -0.4px;
+}
+
+.reports-toolbar p,
+.settings-heading p {
+  font-size: 14px;
+  color: var(--ink-500);
+}
+
+.report-stat,
+.report-card {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.report-stat-icon {
+  background: var(--brand-50);
+  color: var(--brand-600);
+  border-radius: 12px;
+}
+
+.report-stat strong {
+  font-size: 22px;
+}
+
+.progress-fill {
+  background: linear-gradient(90deg, #10b981, #059669);
+}
+
+.report-pill.info {
+  background: var(--brand-50);
+  color: var(--brand-700);
+}
+
+.report-select {
+  border-color: var(--line);
+  border-radius: 10px;
+}
+
+.report-table th {
+  font-size: 12px;
+  color: var(--ink-500);
+}
+
+.report-table td {
+  font-size: 13px;
+}
+
+/* ---------- Settings ---------- */
+
+.settings-icon {
+  background: var(--brand-50);
+  color: var(--brand-600);
+  border-radius: 10px;
+}
+
+.settings-field input:focus,
+.settings-field select:focus {
+  outline: none;
+  border-color: var(--brand-600);
+  box-shadow: 0 0 0 4px rgba(5, 150, 105, 0.12);
+}
+
+.settings-field input,
+.settings-field select {
+  border-color: var(--line);
+  border-radius: 10px;
+}
+
+.toggle.on {
+  background: var(--brand-600);
+}
+
+/* ---------- Shop & GST details (Settings) ---------- */
+
+.shop-wide {
+  grid-column: 1 / -1;
+}
+
+.shop-message {
+  margin-bottom: 16px;
+  padding: 11px 14px;
+  border-radius: var(--radius);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.shop-message.success {
+  background: var(--brand-50);
+  border: 1px solid var(--brand-200);
+  color: var(--brand-700);
+}
+
+.shop-message.error {
+  background: var(--danger-50);
+  border: 1px solid #fecaca;
+  color: #b91c1c;
+}
+
+.shop-loading {
+  margin: 0;
+  color: var(--ink-500);
+  font-size: 14px;
+}
+
+.shop-toggle {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line-soft);
+}
+
+.shop-toggle .toggle:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.shop-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 18px;
+}
+
+.shop-actions .primary-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.settings-field input:disabled {
+  background: #f8fafc;
+  color: var(--ink-500);
+}
+
+body.medtrack-dark .shop-toggle {
+  border-color: #374151;
+}
+
+/* ---------- Dark mode for the shell pieces added here ---------- */
+
+body.medtrack-dark .topbar .profile-trigger {
+  background: #1f2937;
+  border-color: #374151;
+}
+
+body.medtrack-dark .topbar .profile-trigger-details strong {
+  color: #f3f4f6;
+}
+
+body.medtrack-dark .topbar .profile-trigger-details span,
+body.medtrack-dark .topbar .profile-chevron {
+  color: #9ca3af;
+}
+
+body.medtrack-dark .topbar .profile-dropdown {
+  background: #1f2937;
+  border-color: #374151;
+}
+
+body.medtrack-dark .topbar .profile-dropdown-user strong {
+  color: #f3f4f6;
+}
+
+body.medtrack-dark .topbar .profile-dropdown .profile-dropdown-item {
+  color: #e5e7eb;
+}
+
+body.medtrack-dark .topbar .profile-dropdown .profile-dropdown-item:hover {
+  background: #263244;
+  color: #6ee7b7;
+}
+
+body.medtrack-dark .topbar .profile-dropdown-divider {
+  background: #374151;
+}

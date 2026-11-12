@@ -1,0 +1,71 @@
+# Run everything with:  docker compose up -d --build
+# Settings come from the .env file next to this one (see .env.example).
+
+x-logging: &logging
+  driver: json-file
+  options:
+    max-size: "10m"
+    max-file: "5"
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    restart: unless-stopped
+    logging: *logging
+    environment:
+      SMTP_EMAIL: ${SMTP_EMAIL}
+      SMTP_APP_PASSWORD: ${SMTP_APP_PASSWORD}
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
+      ADMIN_EMAILS: ${ADMIN_EMAILS}
+      SUPPORT_PHONE: ${SUPPORT_PHONE:-}
+      SUPPORT_EMAIL: ${SUPPORT_EMAIL:-}
+      PAY_UPI_ID: ${PAY_UPI_ID:-}
+      PAY_NOTE: ${PAY_NOTE:-}
+      PLAN_PRICE_MONTHLY: ${PLAN_PRICE_MONTHLY:-499}
+      PLAN_PRICE_YEARLY: ${PLAN_PRICE_YEARLY:-4999}
+      TRIAL_DAYS: ${TRIAL_DAYS:-14}
+      GRACE_DAYS: ${GRACE_DAYS:-3}
+      PAID_START: ${PAID_START:-}
+      BACKUP_KEEP: ${BACKUP_KEEP:-14}
+      BACKUP_INTERVAL_HOURS: ${BACKUP_INTERVAL_HOURS:-24}
+    volumes:
+      - medtrack-data:/data
+    expose:
+      - "8080"
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - >-
+          bash -c 'exec 3<>/dev/tcp/127.0.0.1/8080 &&
+          printf "GET /api/health HTTP/1.0\r\n\r\n" >&3 &&
+          grep -q "\"ok\"" <&3'
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.web
+    restart: unless-stopped
+    logging: *logging
+    depends_on:
+      api:
+        condition: service_healthy
+    environment:
+      DOMAIN: ${DOMAIN}
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - caddy-data:/data
+      - caddy-config:/config
+
+volumes:
+  medtrack-data:
+  caddy-data:
+  caddy-config:

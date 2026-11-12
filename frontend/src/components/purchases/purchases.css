@@ -1,0 +1,183 @@
+/* =========================================================
+   PURCHASES AND SUPPLIERS
+   Shares the card, table and dialog styles of billing and customers.
+========================================================= */
+
+.pur-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.75fr) minmax(290px, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.pur-head {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.pur-head label,
+.pur-fields label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink-700);
+}
+
+.pur-head input,
+.pur-head select,
+.pur-fields input,
+.pur-fields select {
+  width: 100%;
+  height: 40px;
+  min-width: 0;
+  box-sizing: border-box;
+  padding: 0 10px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface);
+  color: var(--ink-900);
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.pur-supplier {
+  display: flex;
+  gap: 6px;
+}
+
+.pur-supplier select {
+  flex: 1;
+}
+
+.pur-supplier button {
+  flex-shrink: 0;
+  height: 40px;
+  min-height: 0;
+  padding: 0 10px;
+}
+
+.pur-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.pur-line {
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+
+.pur-line-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.pur-line-head strong {
+  display: block;
+  font-size: 14px;
+  color: var(--ink-900);
+}
+
+.pur-line-head small {
+  font-size: 12px;
+  color: var(--ink-500);
+}
+
+.pur-fields {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.pur-fields output {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink-900);
+}
+
+.pur-summary {
+  position: sticky;
+  top: 0;
+}
+
+.pur-pay {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 12px 0;
+}
+
+/* Billing keeps this button floating on phones; here it would cover the payment fields. */
+.pur-summary .bill-generate {
+  position: static;
+}
+
+.pur-hint {
+  margin: 0 0 12px;
+  font-size: 13px;
+  color: var(--ink-700);
+}
+
+.pur-hint.bad {
+  color: var(--danger-600);
+}
+
+.cust-dialog.wide {
+  max-width: 880px;
+}
+
+.cust-detail .bill-totals,
+.return-body > .bill-totals {
+  margin: 8px 0 0;
+}
+
+@media (max-width: 1100px) {
+  .pur-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .pur-summary {
+    position: static;
+  }
+}
+
+@media (max-width: 640px) {
+  .pur-head {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .pur-fields {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+body.medtrack-dark .pur-line {
+  border-color: #374151;
+}
+
+body.medtrack-dark .pur-head input,
+body.medtrack-dark .pur-head select,
+body.medtrack-dark .pur-fields input,
+body.medtrack-dark .pur-fields select {
+  background: #111827;
+  border-color: #4b5563;
+  color: #f3f4f6;
+}
+
+body.medtrack-dark .pur-line-head strong,
+body.medtrack-dark .pur-fields output {
+  color: #f3f4f6;
+}

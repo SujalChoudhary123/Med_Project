@@ -1,0 +1,635 @@
+/* =========================================================
+   PHONES AND TABLETS
+   Loaded last. Below 900px the sidebar becomes a slide-in menu
+   (button in the top bar) and every page uses the full width.
+   Desktop layout is not touched by anything outside @media blocks.
+========================================================= */
+
+.menu-toggle,
+.sidebar-backdrop {
+  display: none;
+}
+
+.topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.topbar-title {
+  min-width: 0;
+}
+
+/* Tables that must scroll sideways instead of squeezing */
+.inventory-table-wrapper,
+.dash-table-wrap,
+.bill-table-wrap,
+.team-table-wrap,
+.table-wrap {
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: 900px) {
+  /* ---------- slide-in menu ---------- */
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2000;
+    width: min(300px, 86vw);
+    height: 100vh;
+    height: 100dvh;
+    min-height: 0;
+    padding: 20px 14px 18px;
+    transform: translateX(-104%);
+    transition: transform 0.22s ease;
+    box-shadow: none;
+  }
+
+  .sidebar.open {
+    transform: none;
+    box-shadow: 8px 0 40px rgba(0, 0, 0, 0.35);
+  }
+
+  .sidebar-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 1999;
+    background: rgba(15, 23, 42, 0.55);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.22s ease;
+  }
+
+  .sidebar-backdrop.show {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* undo the old "icons only" sidebar */
+  .logo {
+    justify-content: flex-start;
+    padding: 4px 10px 22px;
+  }
+
+  .logo > div:last-child {
+    font-size: inherit;
+  }
+
+  .nav-caption {
+    display: block;
+  }
+
+  .nav-item {
+    justify-content: flex-start;
+    padding: 13px 12px;
+    font-size: 15px;
+  }
+
+  .nav-item.active::before {
+    left: -14px;
+  }
+
+  /* ---------- page frame ---------- */
+
+  .app {
+    display: block;
+  }
+
+  .main-content {
+    width: 100%;
+    height: 100vh !important;
+    height: 100dvh !important;
+    min-height: 0;
+    padding: 14px 14px 0;
+  }
+
+  .menu-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--surface);
+    color: var(--ink-700);
+    cursor: pointer;
+  }
+
+  .topbar {
+    margin-bottom: 14px;
+    gap: 10px;
+  }
+
+  .topbar h1 {
+    font-size: 21px;
+  }
+
+  .topbar p {
+    font-size: 13px;
+  }
+
+  /* the profile menu stays reachable on phones (older rules hid it) */
+  .topbar .profile {
+    display: flex;
+  }
+
+  .topbar .profile-trigger {
+    padding: 4px;
+    border-radius: 12px;
+  }
+
+  .topbar .profile-trigger-details,
+  .topbar .profile-chevron {
+    display: none;
+  }
+
+  .topbar .profile-dropdown {
+    position: fixed;
+    top: 64px;
+    right: 12px;
+    width: min(280px, calc(100vw - 24px));
+  }
+
+  /* ---------- content ---------- */
+
+  .dash,
+  .bill-page,
+  .team-page {
+    padding-right: 0;
+  }
+
+  /* A page must never scroll sideways on a phone (tables scroll inside their own card). */
+  .dash,
+  .bill-page,
+  .team-page,
+  .page-scroll,
+  .reports-page,
+  .settings-page {
+    overflow-x: hidden;
+  }
+
+  /* the last bar's pop-up must stay on screen */
+  .dash-bar-col:last-child .dash-tip {
+    right: 0;
+    left: auto;
+    transform: none;
+  }
+
+  .dashboard-card,
+  .inventory-card,
+  .settings-card {
+    padding: 16px;
+  }
+
+  .inventory-card {
+    padding: 0;
+  }
+
+  .card-header {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .stats-grid {
+    gap: 12px;
+  }
+
+  .dash-hero {
+    padding: 20px 18px;
+  }
+
+  .dash-hero h2 {
+    font-size: 22px;
+  }
+
+  .page-scroll {
+    padding-right: 0;
+  }
+
+  /* wide two-column forms become one column */
+  [style*="grid-template-columns"]:not(.rep-chart) {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .main-content {
+    padding: 12px 12px 0;
+  }
+
+  /* iPhones zoom the page when a field smaller than 16px is focused */
+  input:not([type="checkbox"]):not([type="radio"]),
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+
+  .topbar p {
+    display: none;
+  }
+
+  /* four summary numbers sit in a compact 2 x 2 block */
+  .stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .stat-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 12px;
+  }
+
+  .stat-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+  }
+
+  .stat-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .stat-card span {
+    font-size: 12px;
+  }
+
+  .stat-card strong {
+    margin-top: 2px;
+    font-size: 18px;
+    overflow-wrap: anywhere;
+  }
+
+  .stat-card small {
+    font-size: 11px;
+  }
+
+  .dash-hero {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .dash-hero-actions {
+    width: 100%;
+  }
+
+  .dash-hero-actions .dash-btn {
+    flex: 1;
+    justify-content: center;
+  }
+
+  .dash-chart {
+    gap: 4px;
+  }
+
+  .dash-bar-value {
+    display: none;
+  }
+
+  .dash-attention li {
+    flex-wrap: wrap;
+  }
+
+  .dash-pill {
+    margin-left: 50px;
+  }
+
+  /* inventory */
+
+  .inventory-toolbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .search-area {
+    flex-wrap: wrap;
+  }
+
+  .search-box,
+  .search-area select {
+    width: 100%;
+  }
+
+  .add-medicine-button {
+    width: 100%;
+  }
+
+  .inventory-footer {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .inventory-actions {
+    flex-wrap: wrap;
+  }
+
+  .inventory-actions button {
+    flex: 1;
+  }
+
+  /* report summary numbers: the same compact 2 x 2 block */
+
+  .report-stat-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .report-stat {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 12px;
+  }
+
+  .report-stat-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+  }
+
+  .report-stat strong {
+    font-size: 18px;
+    overflow-wrap: anywhere;
+  }
+
+  .report-stat span,
+  .report-stat small {
+    font-size: 11.5px;
+  }
+
+  .custom-date-row {
+    flex-wrap: wrap;
+  }
+
+  .report-actions {
+    justify-content: flex-start;
+  }
+
+  .report-actions .report-select {
+    flex: 1 1 100%;
+  }
+
+  /* settings, team, profile */
+
+  .settings-heading,
+  .reports-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .settings-actions button,
+  .shop-actions button {
+    flex: 1;
+    width: 100%;
+  }
+
+  .team-form .primary-button {
+    height: 46px;
+  }
+
+  /* ---------- billing ---------- */
+
+  .bill-search {
+    height: 50px;
+  }
+
+  .bill-customer .two {
+    grid-template-columns: 1fr;
+  }
+
+  .bill-history-search {
+    width: 100%;
+  }
+
+  .bill-generate {
+    position: sticky;
+    bottom: 8px;
+    z-index: 5;
+    box-shadow: 0 8px 24px rgba(5, 150, 105, 0.35);
+  }
+
+  /* rows become little cards */
+
+  .bill-table.cards thead {
+    display: none;
+  }
+
+  .bill-table.cards,
+  .bill-table.cards tbody {
+    display: block;
+  }
+
+  .bill-table.cards tr {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px 14px;
+    margin-bottom: 10px;
+    padding: 12px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--surface);
+  }
+
+  .bill-table.cards tr.warn {
+    background: #fffbeb;
+  }
+
+  .bill-table.cards td {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 0;
+    border: 0;
+    text-align: right;
+  }
+
+  .bill-table.cards td::before {
+    content: attr(data-label);
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    color: var(--ink-500);
+    text-align: left;
+  }
+
+  .bill-table.cards td.lead {
+    display: block;
+    grid-column: 1 / -1;
+    padding-right: 34px;
+    text-align: left;
+  }
+
+  .bill-table.cards td.lead::before {
+    display: none;
+  }
+
+  .bill-table.cards td.action {
+    grid-column: 1 / -1;
+    justify-content: flex-end;
+  }
+
+  .bill-table.cards td.action::before {
+    display: none;
+  }
+
+  .bill-table.cards td .bill-remove {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+  }
+
+  .bill-table.cards td input[type="number"] {
+    width: 84px;
+    height: 40px;
+  }
+
+  .bill-table.cards td.action .secondary-button {
+    width: 100%;
+  }
+
+  /* ---------- invoice / credit note preview ---------- */
+
+  .invoice-toolbar {
+    padding: 10px 12px;
+  }
+
+  .invoice-actions {
+    gap: 6px;
+  }
+
+  .invoice-actions button,
+  .invoice-actions a {
+    flex: 1;
+    height: 40px;
+    padding: 0 10px;
+    font-size: 13px;
+  }
+
+  .invoice-scroll {
+    padding: 10px 6px 30px;
+  }
+
+  /* ---------- return dialog: a sheet from the bottom ---------- */
+
+  .return-overlay {
+    align-items: flex-end;
+    padding: 0;
+  }
+
+  .return-card {
+    max-width: none;
+    max-height: 94vh;
+    max-height: 94dvh;
+    border-radius: 18px 18px 0 0;
+  }
+
+  .return-head,
+  .return-foot {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .return-body {
+    padding: 8px 16px 14px;
+  }
+
+  .return-foot {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .return-buttons button {
+    flex: 1;
+  }
+}
+
+/* The A4 sheet is shrunk to fit the screen (pinch to zoom in). Printing is never shrunk. */
+@media (max-width: 860px) {
+  .invoice-sheet {
+    zoom: 0.9;
+  }
+}
+
+@media (max-width: 780px) {
+  .invoice-sheet {
+    zoom: 0.8;
+  }
+}
+
+@media (max-width: 700px) {
+  .invoice-sheet {
+    zoom: 0.72;
+  }
+}
+
+@media (max-width: 620px) {
+  .invoice-sheet {
+    zoom: 0.62;
+  }
+}
+
+@media (max-width: 530px) {
+  .invoice-sheet {
+    zoom: 0.52;
+  }
+}
+
+@media (max-width: 450px) {
+  .invoice-sheet {
+    zoom: 0.47;
+  }
+}
+
+@media (max-width: 380px) {
+  .invoice-sheet {
+    zoom: 0.44;
+  }
+}
+
+@media (max-width: 345px) {
+  .invoice-sheet {
+    zoom: 0.4;
+  }
+}
+
+/* On a phone the document preview is a full page, not a dimmed pop-up */
+@media (max-width: 640px) {
+  .invoice-modal {
+    background: #e5e7eb;
+  }
+
+  .invoice-scroll {
+    padding-top: 12px;
+  }
+}
+
+@media print {
+  .invoice-sheet {
+    zoom: 1 !important;
+  }
+}
+
+/* ---------- dark mode for the phone menu ---------- */
+
+body.medtrack-dark .menu-toggle {
+  background: #1f2937;
+  border-color: #374151;
+  color: #e5e7eb;
+}
+
+body.medtrack-dark .bill-table.cards tr {
+  background: #1f2937;
+  border-color: #374151;
+}

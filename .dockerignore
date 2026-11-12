@@ -1,0 +1,14 @@
+**/node_modules
+frontend/dist
+**/*.db
+**/*.db-wal
+**/*.db-shm
+**/*.class
+out
+backup
+backups
+.env
+server.env
+.vscode
+
+medtrack-release.zip

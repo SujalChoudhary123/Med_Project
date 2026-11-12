@@ -1,0 +1,13 @@
+# React app, served by Caddy (which also provides automatic HTTPS and
+# forwards /api to the Java server).
+FROM node:22-alpine AS build
+WORKDIR /web
+COPY frontend/package.json frontend/package-lock.json ./
+RUN npm ci
+COPY frontend/ ./
+# Uses frontend/.env (Google client ID) and frontend/.env.production (same-site API).
+RUN npm run build
+
+FROM caddy:2-alpine
+COPY --from=build /web/dist /srv
+COPY deploy/Caddyfile /etc/caddy/Caddyfile

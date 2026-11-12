@@ -1,0 +1,40 @@
+body {
+  margin: 0;
+  background: #f4f6f8;
+  color: #0f172a;
+  font-family: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+  line-height: 1.6;
+}
+
+main {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 28px 16px 56px;
+}
+
+.back {
+  color: #047857;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+h1 {
+  margin: 20px 0 4px;
+  font-size: 28px;
+}
+
+h2 {
+  margin: 26px 0 6px;
+  font-size: 17px;
+}
+
+p,
+li {
+  color: #334155;
+  font-size: 15px;
+}
+
+.updated {
+  color: #64748b;
+  font-size: 13.5px;
+}

@@ -1,0 +1,15 @@
+MEDICINE MANAGEMENT SYSTEM - RUN COMMANDS
+
+Open a terminal in this folder.
+
+1) Compile:
+   javac -cp "lib/sqlite-jdbc-3.53.4.0.jar;lib/flatlaf-3.4.1.jar" -d out src\*.java
+
+2) Run:
+   java -cp "out;lib/sqlite-jdbc-3.53.4.0.jar;lib/flatlaf-3.4.1.jar" Main
+
+PowerShell uses the same commands.
+
+IMPORTANT:
+- Run the commands from this inner MedicineManagementSystem folder.
+- Keep the lib folder and medicine_inventory.db in place.

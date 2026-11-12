@@ -1,0 +1,256 @@
+/* =========================================================
+   REPORTS (sales overview, GST, stock and expiry)
+========================================================= */
+
+.rep-tabs {
+  display: inline-flex;
+  gap: 4px;
+  max-width: 100%;
+  margin: 0 0 18px;
+  padding: 4px;
+  border-radius: 12px;
+  background: #eef2f6;
+  overflow-x: auto;
+}
+
+.rep-tabs button {
+  flex-shrink: 0;
+  height: 38px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 9px;
+  background: transparent;
+  color: var(--ink-500);
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.rep-tabs button.active {
+  background: var(--surface);
+  color: var(--brand-700);
+  box-shadow: var(--shadow-sm);
+}
+
+.reports-page .report-table th.num,
+.reports-page .report-table td.num {
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* ---------- sales trend chart ---------- */
+
+.rep-chart {
+  display: grid;
+  gap: 6px;
+  align-items: end;
+  padding-top: 18px;
+}
+
+.rep-bar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.rep-bar-track {
+  width: 100%;
+  height: 190px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  border-radius: 8px;
+  background: repeating-linear-gradient(
+    to top,
+    transparent 0,
+    transparent 46px,
+    var(--line-soft) 46px,
+    var(--line-soft) 47px
+  );
+}
+
+.rep-bar-fill {
+  width: min(34px, 72%);
+  border-radius: 7px 7px 3px 3px;
+  background: linear-gradient(180deg, #34d399, #059669);
+}
+
+.rep-bar:hover .rep-bar-fill {
+  filter: brightness(0.92);
+}
+
+.rep-bar span {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: clip;
+  white-space: nowrap;
+  font-size: 11.5px;
+  color: var(--ink-500);
+}
+
+/* ---------- downloads and notes ---------- */
+
+.rep-downloads {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding-top: 16px;
+}
+
+.rep-downloads button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.rep-note {
+  margin: 14px 0 0;
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: var(--ink-500);
+}
+
+/* ---------- stock lists ---------- */
+
+.rep-stock-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.rep-stock-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.rep-stock-row:last-of-type {
+  border-bottom: 0;
+}
+
+.rep-stock-row strong {
+  display: block;
+  font-size: 14px;
+  color: var(--ink-900);
+}
+
+.rep-stock-row span {
+  display: block;
+  margin-top: 2px;
+  font-size: 12.5px;
+  color: var(--ink-500);
+}
+
+.rep-stock-qty {
+  flex-shrink: 0;
+  text-align: right;
+}
+
+.rep-stock-qty strong {
+  font-size: 18px;
+}
+
+.rep-inline-select {
+  height: 28px;
+  padding: 0 6px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--ink-700);
+  font-size: 12.5px;
+}
+
+.card-header h2 .report-pill {
+  margin-left: 6px;
+  vertical-align: middle;
+}
+
+.reports-page .report-pill.danger {
+  background: var(--danger-50);
+  color: var(--danger-600);
+}
+
+.reports-page .report-pill.warning {
+  background: var(--warn-50);
+  color: var(--warn-600);
+}
+
+.reports-page .report-pill.info {
+  background: #fefce8;
+  color: #a16207;
+}
+
+/* ---------- dark mode ---------- */
+
+body.medtrack-dark .rep-tabs {
+  background: #111827;
+}
+
+body.medtrack-dark .rep-tabs button.active {
+  background: #1f2937;
+  color: #6ee7b7;
+}
+
+body.medtrack-dark .rep-bar-track {
+  background: repeating-linear-gradient(
+    to top,
+    transparent 0,
+    transparent 46px,
+    #374151 46px,
+    #374151 47px
+  );
+}
+
+body.medtrack-dark .rep-stock-row {
+  border-color: #374151;
+}
+
+body.medtrack-dark .rep-stock-row strong {
+  color: #f3f4f6;
+}
+
+body.medtrack-dark .rep-stock-row span,
+body.medtrack-dark .rep-note,
+body.medtrack-dark .rep-bar span {
+  color: #9ca3af;
+}
+
+body.medtrack-dark .rep-inline-select {
+  background: #111827;
+  border-color: #4b5563;
+  color: #f3f4f6;
+}
+
+/* ---------- phones ---------- */
+
+@media (max-width: 640px) {
+  .rep-tabs {
+    display: flex;
+    width: 100%;
+  }
+
+  .rep-tabs button {
+    flex: 1;
+    padding: 0 10px;
+    font-size: 13px;
+  }
+
+  .rep-bar-track {
+    height: 140px;
+  }
+
+  .rep-downloads button {
+    flex: 1 1 100%;
+  }
+}
+
+@media print {
+  .rep-tabs,
+  .rep-downloads {
+    display: none !important;
+  }
+}
